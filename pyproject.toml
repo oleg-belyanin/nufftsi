@@ -1,0 +1,93 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "nufftsi"
+version = "0.1.0"
+description = "Spectral NUFFT interpolator for irregular complex 1D/2D/3D samples (sigpy and torch backends)"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [
+  { name = "Oleg Belyanin" },
+]
+keywords = [
+  "nufft",
+  "interpolation",
+  "spectral",
+  "wavelet",
+  "sigpy",
+  "pytorch",
+  "nonuniform",
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering",
+  "Typing :: Typed",
+]
+dependencies = [
+  "numpy>=1.22",
+]
+
+[project.optional-dependencies]
+sigpy = [
+  "sigpy>=0.1.26",
+  "scipy>=1.7",
+]
+torch = [
+  "torch>=2.0",
+  "torchkbnufft>=1.4",
+  "ptwt>=0.1.4",
+]
+dev = [
+  "pytest>=7.0",
+  "sigpy>=0.1.26",
+  "scipy>=1.7",
+  "torch>=2.0",
+  "torchkbnufft>=1.4",
+  "ptwt>=0.1.4",
+]
+all = [
+  "pytest>=7.0",
+  "matplotlib>=3.5",
+  "sigpy>=0.1.26",
+  "scipy>=1.7",
+  "torch>=2.0",
+  "torchkbnufft>=1.4",
+  "ptwt>=0.1.4",
+]
+
+[project.urls]
+Homepage = "https://github.com/oleg-belyanin/nufftsi"
+Documentation = "https://github.com/oleg-belyanin/nufftsi#readme"
+Issues = "https://github.com/oleg-belyanin/nufftsi/issues"
+
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/nufftsi"]
+
+# Map src/ layout so the import path is nufftsi.*
+[tool.hatch.build.targets.wheel.sources]
+"src/nufftsi" = "nufftsi"
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "/src",
+  "/tests",
+  "/docs",
+  "/examples",
+  "/README.md",
+  "/LICENSE",
+  "/CHANGELOG.md",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
